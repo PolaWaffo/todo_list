@@ -1,0 +1,30 @@
+@import "tailwindcss";
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ }
+ html{
+    overflow-x: hidden;
+}
+body{
+    overflow-y: scroll;
+}
+body::-webkit-scrollbar{
+    display: none;
+}
+@theme{
+    --color-primary:#6c63ff;
+    --color-secondary:#4a44c6;
+    --color-accent:#ff6584;
+    --color-success:#28a745;
+    --color-warning:#ffc107;
+    --color-danger:#dc3545;
+    --shadow-card:0 4px 6px rgba(0, 0, 0, 0.1);
+    --color-background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --color-light-primary: #f8f9fa;
+    --color-light-primary: #343a40;
+    --color-light-secondary: #6c757d;
+    --color-border: #e0e0e0;
+}
