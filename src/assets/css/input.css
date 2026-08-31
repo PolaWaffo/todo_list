@@ -1,30 +1,70 @@
 @import "tailwindcss";
-   * {
-    margin: 0;
-    padding: 0;
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+* {
     box-sizing: border-box;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
- }
- html{
+}
+
+html {
     overflow-x: hidden;
 }
-body{
+
+body {
+    margin: 0;
+    min-height: 100vh;
     overflow-y: scroll;
+    background-color: var(--background);
+    color: var(--text);
 }
-body::-webkit-scrollbar{
+
+main {
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--text);
+}
+
+body::-webkit-scrollbar,
+.scrolling::-webkit-scrollbar {
     display: none;
 }
-@theme{
-    --color-primary:#6c63ff;
-    --color-secondary:#4a44c6;
-    --color-accent:#ff6584;
-    --color-success:#28a745;
-    --color-warning:#ffc107;
-    --color-danger:#dc3545;
-    --shadow-card:0 4px 6px rgba(0, 0, 0, 0.1);
-    --color-background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+.scrolling {
+    overflow: scroll;
+}
+
+@theme {
+    --color-primary: #6c63ff;
+    --color-secondary: #4a44c6;
+    --color-accent: #ff6584;
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1);
     --color-light-primary: #f8f9fa;
-    --color-light-primary: #343a40;
     --color-light-secondary: #6c757d;
     --color-border: #e0e0e0;
+}
+
+@layer components {
+    .input {
+        @apply outline-none border-gray-200 flex-1 border rounded-lg p-2 caret-primary;
+    }
+
+    .btn {
+        @apply border border-gray-400 rounded-xl p-2 h-fit text-[12px] cursor-pointer text-center;
+    }
+}
+
+.menu .moon {
+    display: none;
+}
+
+.menu.active .sun {
+    display: none;
+}
+
+.menu.active .moon {
+    display: block;
 }
