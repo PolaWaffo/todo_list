@@ -166,7 +166,7 @@ export class TodoApp {
             this.renderTasks();
         });
 
-        // Previous page
+
         this.prevBtn.addEventListener("click", () => {
             if (this.currentPage > 1) {
                 this.currentPage--;
@@ -174,7 +174,7 @@ export class TodoApp {
             }
         });
 
-        // Next page
+    
         this.nextBtn.addEventListener("click", () => {
             const totalPages = this.getTotalPages();
 
@@ -184,17 +184,17 @@ export class TodoApp {
             }
         });
 
-        // Cancel edit
+   
         this.cancelEditBtn.addEventListener("click", () => {
             this.closeEditModal();
         });
 
-        // Cancel delete
+    
         this.cancelDeleteBtn.addEventListener("click", () => {
             this.closeDeleteModal();
         });
 
-        // Confirm delete
+      
         this.deleteBtn.addEventListener("click", () => {
             if (this.deleteTaskId === null) {
                 return;
@@ -204,15 +204,13 @@ export class TodoApp {
             this.closeDeleteModal();
         });
 
-        // Save edit
+      
         this.saveEditBtn.addEventListener("click", () => {
             this.saveTaskEdit();
         });
     }
 
-    // =========================
-    // ADD TASK
-    // =========================
+  
 
     addTask() {
         const text = this.taskInput.value.trim();
@@ -317,14 +315,11 @@ export class TodoApp {
         this.deleteModal.classList.add("hidden");
         this.deleteModal.classList.remove("flex");
 
-        // Important:
-        // We don't want to keep the previous ID
+     
         this.deleteTaskId = null;
     }
 
-    // =========================
-    // TOGGLE COMPLETE
-    // =========================
+ 
 
     toggleComplete(id) {
         const task = this.tasks.find(
@@ -350,9 +345,6 @@ export class TodoApp {
         }
     }
 
-    // =========================
-    // OPEN EDIT MODAL
-    // =========================
 
     openEditModal(id) {
         const task = this.tasks.find(
@@ -381,9 +373,6 @@ export class TodoApp {
         this.editingTaskId = null;
     }
 
-    // =========================
-    // SAVE EDIT
-  
 
     saveTaskEdit() {
         const task = this.tasks.find(
@@ -404,7 +393,6 @@ export class TodoApp {
             return;
         }
 
-        // Check duplicate task
         const duplicate = this.tasks.find(
             (item) =>
                 item.id !== this.editingTaskId &&
@@ -430,28 +418,23 @@ export class TodoApp {
         this.showNotification("Tâche modifiée");
     }
 
-    // =========================
-    // FILTER
-    // =========================
+
 
     getFilteredTasks() {
         let filteredTasks = [...this.tasks];
 
-        // Pending
         if (this.currentFilter === "attente") {
             filteredTasks = filteredTasks.filter(
                 (task) => !task.completed
             );
         }
 
-        // Completed
         if (this.currentFilter === "terminees") {
             filteredTasks = filteredTasks.filter(
                 (task) => task.completed
             );
         }
 
-        // Search
         if (this.searchQuery.trim() !== "") {
             const search =
                 this.searchQuery.toLowerCase().trim();
@@ -467,9 +450,6 @@ export class TodoApp {
         return this.sortTasks(filteredTasks);
     }
 
-    // =========================
-    // SORT
-    // =========================
 
     sortTasks(tasks) {
         if (this.currentSort === "date-asc") {
@@ -517,9 +497,6 @@ export class TodoApp {
         return tasks;
     }
 
-    // =========================
-    // PAGINATION
-    // =========================
 
     getPaginatedTasks() {
         const filteredTasks =
@@ -545,8 +522,6 @@ export class TodoApp {
         );
     }
 
-    // =========================
-    // RENDER TASKS
  
 
     renderTasks() {
@@ -623,7 +598,7 @@ export class TodoApp {
 
           
             div.className =
-                "flex items-center justify-between p-4 border-b border-gray-500 even:bg-purple-200";
+                "flex items-center justify-between p-4 border-b border-gray-500 even:bg-amber-500/20";
 
             content.className =
                 "flex items-center gap-3";
@@ -634,18 +609,17 @@ export class TodoApp {
 
             checkbox.type = "checkbox";
             checkbox.checked = task.completed;
+            checkbox.className="accent-success"
 
     
             text.textContent = task.text;
 
-            // Priority
             priority.textContent =
                 task.priority;
 
             priority.className =
-                "text-xs px-2 py-1 rounded bg-gray-100";
+                "text-xs px-2 py-1 rounded bg-gray-100 dark:bg-success";
 
-            // Due date
             if (task.dueDate) {
                 date.textContent =
                     `Échéance : ${this.formatDate(
@@ -656,21 +630,20 @@ export class TodoApp {
                     "text-xs text-gray-500";
             }
 
-            // Icons
+          
             editIcon.className =
                 "fa-solid fa-pen text-green-500";
 
             deleteIcon.className =
                 "fa-solid fa-trash text-red-500";
 
-            // Buttons
             editBtn.type = "button";
             deleteBtn.type = "button";
 
             editBtn.appendChild(editIcon);
             deleteBtn.appendChild(deleteIcon);
 
-            // Complete
+        
             checkbox.addEventListener(
                 "change",
                 () => {
@@ -678,7 +651,7 @@ export class TodoApp {
                 }
             );
 
-            // Edit
+
             editBtn.addEventListener(
                 "click",
                 () => {
@@ -701,7 +674,7 @@ export class TodoApp {
                 );
             }
 
-            // Build content
+  
             content.appendChild(checkbox);
             content.appendChild(text);
             content.appendChild(priority);
@@ -724,9 +697,6 @@ export class TodoApp {
         this.checkDueDates();
     }
 
-    // =========================
-    // PAGINATION UI
-    // =========================
 
     updatePagination() {
         const totalPages =
@@ -899,9 +869,7 @@ export class TodoApp {
             this.darkMode;
     }
 
-    // =========================
-    // FORMAT DATE
-    // =========================
+
 
     formatDate(date) {
         return new Date(date).toLocaleDateString(

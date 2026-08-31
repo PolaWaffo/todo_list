@@ -1,26 +1,36 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="./assets/css/icons/all.min.css" />
-  <link rel="stylesheet" href="./assets/css/output.css" />
-</head>
-
-<body class="min-h-screen bg-linear-300 from-[#667eea] to-[#764ba2] grid place-items-center p-4">
-  <div id="notification" class="hidden fixed top-5 right-5 z-50 bg-primary text-white px-5 py-3 rounded-lg shadow-lg">
-  </div>
-  <main class="w-[90vw] md:w-[60vw] bg-white rounded-2xl border-none shadow-card overflow-hidden">
-    <header class="relative bg-secondary text-white p-5 border-none">
-      <div class="flex items-center justify-between text-white">
-        <h1 class="text-2xl font-bold text-white">Pola</h1>
-        <div class="absolute rounded-full p-10 w-15 h-15 bg-white -right-8 -top-6 opacity-25"></div>
-        <button id="menu"
-          class="menu z-2 w-10 h-10 rounded-full bg-white/50 group hover:bg-white/30 flex items-center justify-center">
-          <i class="fa-solid fa-sun sun block group-hover:rotate-90 text-xl transform transition-all duration-500">
-          </i>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/icons/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/output.css" />
+  </head>
+  <body
+    class="min-h-screen bg-linear-300 from-[#667eea] to-[#764ba2] grid place-items-center p-4"
+  >
+    <div
+      id="notification"
+      class="hidden fixed top-5 right-5 z-50 bg-primary text-white px-5 py-3 rounded-lg shadow-lg"
+    ></div>
+    <main
+      class="w-[90vw] md:w-[60vw] rounded-2xl border-none shadow-card overflow-hidden"
+    >
+      <header class="relative bg-secondary dark:bg-primary text-white p-5 border-none">
+        <div class="flex items-center justify-between text-white">
+          <h1 class="text-2xl font-bold text-white">Pola</h1>
+          <div
+            class="absolute rounded-full p-10 w-15 h-15 bg-white -right-8 -top-6 opacity-25"
+          ></div>
+          <button
+            id="menu"
+            class="menu z-2 w-10 h-10 rounded-full bg-white/50 group hover:bg-white/30 flex items-center justify-center"
+          >
+            <i
+              class="fa-solid fa-sun sun block group-hover:rotate-90 text-xl transform transition-all duration-500"
+            >
+            </i>
 
           <i class="fa-solid fa-moon moon block group-hover:rotate-90 text-xl transform transition-all duration-500">
           </i>
@@ -47,96 +57,138 @@
       </div>
     </header>
 
-    <form id="todoForm" class="grid grid-cols-3 md:grid-cols-6 gap-2 p-3 bg-white">
-      <input class="input col-span-2 placeholder:text-[10px]" type="text" name="" id="task"
-        placeholder="Ajouter une nouvelle tache..." />
-      <select name="" id="priority" class="border-gray-200 px-2 outline-none border rounded-lg">
-        <option value="facile">Facile</option>
-        <option value="moyenne">Moyenne</option>
+      <form
+        id="todoForm"
+        class="grid grid-cols-3 md:grid-cols-6 gap-2 p-3 bg-white dark:bg-gray-900 dark:text-white"
+      >
+        <input
+          class="input col-span-2 placeholder:text-[10px]"
+          type="text"
+          name=""
+          id="task"
+          placeholder="Ajouter une nouvelle tache..."
+        />
+        <select
+          name=""
+          id="priority"
+          class="border-gray-200 px-2 outline-none border rounded-lg"
+        >
+          <option value="facile">Facile</option>
+          <option value="moyenne">Moyenne</option>
 
-        <option value="difficile">Difficile</option>
-      </select>
-      <input id="dueDate" type="date" class="border-gray-200 input col-span-2 px-2 outline-none border rounded-lg" />
-      <button id="submitBtn" type="submit"
-        class="bg-primary justify-center self-center flex items-center text-white rounded-lg btn px-2">
-        <i class="fa-solid fa-plus"></i>Ajouter
-      </button>
-    </form>
-    <section class="grid md:grid-cols-2 gap-2 p-3 bg-white items-center">
-      <div class="grid grid-cols-2 md:grid-cols-3 text-nowrap gap-2">
-        <div id="allTasks" class="btn">Toutes</div>
-        <div id="pendingTasks" class="btn">En attente</div>
-        <div id="completedTasks" class="btn">Terminees</div>
-      </div>
-      <div
-        class="border flex items-center justify-between flex-1 border-gray-200 rounded-2xl p-2 group focus-within:border-primary">
-        <input id="search" type="text" class="outline-none" placeholder="Rechercher..." />
-        <i class="fa-solid fa-magnifying-glass group-focus-within:text-primary"></i>
-      </div>
-    </section>
-    <section id="editModal" class="hidden fixed inset-0 bg-black/50 items-center justify-center">
-      <div class="bg-white p-5 rounded-xl space-y-3">
-        <h2>Modifier la tâche</h2>
-
-        <div class="flex justify-between gap-2">
-          <input id="editTaskInput" type="text" class="input" placeholder="Modifier la tâche..." />
-
-          <select id="editPriorityInput" class="border-gray-200 px-2 outline-none border rounded-lg">
-            <option value="facile">Facile</option>
-            <option value="moyenne">Moyenne</option>
-            <option value="difficile">Difficile</option>
-          </select>
+          <option value="difficile">Difficile</option>
+        </select>
+        <input
+          id="dueDate"
+          type="date"
+          class="border-gray-200 input col-span-2 px-2 outline-none border rounded-lg"
+        />
+        <button
+          id="submitBtn"
+          type="submit"
+          class="bg-primary dark:bg-gray-900 justify-center self-center flex items-center text-white rounded-lg btn px-2"
+        >
+          <i class="fa-solid fa-plus"></i>Ajouter
+        </button>
+      </form>
+      <section class="grid md:grid-cols-2 gap-2 p-3 bg-white dark:bg-gray-900 dark:text-white items-center">
+        <div class="grid grid-cols-2 md:grid-cols-3 text-nowrap gap-2">
+          <div id="allTasks" class="btn">Toutes</div>
+          <div id="pendingTasks" class="btn">En attente</div>
+          <div id="completedTasks" class="btn">Terminees</div>
         </div>
+        <div
+          class="border flex items-center justify-between flex-1 border-gray-200 rounded-2xl p-2 group focus-within:border-primary"
+        >
+          <input
+            id="search"
+            type="text"
+            class="outline-none"
+            placeholder="Rechercher..."
+          />
+          <i
+            class="fa-solid fa-magnifying-glass group-focus-within:text-primary"
+          ></i>
+        </div>
+      </section>
+      <section
+        id="editModal"
+        class="hidden fixed inset-0 bg-black/50 items-center justify-center"
+      >
+        <div class="bg-white p-5 rounded-xl space-y-3">
+          <h2>Modifier la tâche</h2>
 
-        <div>
-          <h2>pola tu me decois</h2>
-        </div>
+          <div class="flex justify-between gap-2">
+            <input
+              id="editTaskInput"
+              type="text"
+              class="input"
+              placeholder="Modifier la tâche..."
+            />
+              <input
+              id="editDateInput"
+              type="date"
+              class="input"
+             
+            />
+            <select
+              id="editPriorityInput"
+              class="border-gray-200 px-2 outline-none border rounded-lg"
+            >
+              <option value="facile">Facile</option>
+              <option value="moyenne">Moyenne</option>
+              <option value="difficile">Difficile</option>
+            </select>
+          </div>
 
-        <div class="flex justify-end gap-2">
-          <button class="btn" id="cancelEditBtn">Annuler</button>
-          <button class="btn bg-primary text-white" id="saveEditBtn">
-            Enregistrer
-          </button>
+          <div class="flex justify-end gap-2">
+            <button class="btn" id="cancelEditBtn">Annuler</button>
+            <button class="btn bg-primary text-white" id="saveEditBtn">
+              Enregistrer
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
-    <section id="deleteModal" class="hidden fixed inset-0 bg-black/50 items-center justify-center">
-      <div class="bg-white rounded-xl flex flex-col p-3">
-        <div class="delete">
+      </section>
+      <section
+        id="deleteModal"
+        class="hidden fixed inset-0 bg-black/50 items-center justify-center"
+      >
+        <div class="bg-white rounded-xl flex flex-col p-3 gap-3">
+          <div id="deleteMessage">
 
+          </div>
+          <div class="flex justify-end gap-2">
+            <button class="btn" id="cancelDeleteBtn">Annuler</button>
+            <button class="btn bg-red-500 text-white" id="deleteBtn">
+              Supprimer
+            </button>
+          </div>
         </div>
-        <div class="flex justify-end gap-2">
-          <button class="btn" id="cancelDeleteBtn">Annuler</button>
-          <button class="btn bg-red-500 text-white" id="deleteBtn">
-            Supprimer
-          </button>
-        </div>
-      </div>
-    </section>
-    <section class="flex justify-between items-center px-3 pb-3 bg-white">
-      <label for="sort" class="dark:text-white"> Trier : </label>
+      </section>
+      <section class="flex justify-between items-center px-3 pb-3 bg-white dark:bg-gray-900 dark:text-white">
+        <label for="sort" > Trier : </label>
 
       <select id="sort" class="border border-gray-200 rounded-lg px-3 py-2 outline-none">
         <option value="date-desc">Plus récentes</option>
 
         <option value="date-asc">Plus anciennes</option>
 
-
-      </select>
-    </section>
-    <section id="taskList" class="bg-white h-40 scrolling"></section>
-    <div class="flex justify-center items-center gap-4 p-4 bg-white">
-      <button id="prevBtn" class="btn">
-        <i class="fa-solid fa-chevron-left"></i>
-        Précédent
-      </button>
-      <p id="pageInfo"></p>
-      <button id="nextBtn" class="btn">
-        Suivant
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-    </div>
-  </main>
+      
+        </select>
+      </section>
+      <section id="taskList" class="bg-white dark:bg-gray-900 dark:text-white h-40 scrolling"></section>
+      <div class="flex justify-center items-center gap-4 p-4 bg-white dark:bg-gray-900 dark:text-white">
+        <button id="prevBtn" class="btn">
+          <i class="fa-solid fa-chevron-left"></i>
+          Précédent
+        </button>
+        <p id="pageInfo"></p>
+        <button id="nextBtn" class="btn">
+          Suivant
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </main>
 
   <script src="./assets/css/icons/all.min.js"></script>
 
