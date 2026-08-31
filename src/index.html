@@ -32,32 +32,30 @@
             >
             </i>
 
-            <i
-              class="fa-solid fa-moon moon block group-hover:rotate-90 text-xl transform transition-all duration-500"
-            >
-            </i>
-          </button>
+          <i class="fa-solid fa-moon moon block group-hover:rotate-90 text-xl transform transition-all duration-500">
+          </i>
+        </button>
+      </div>
+
+      <p class="text-center mt-4">Organisez votre vie en un seul endroit</p>
+
+      <div class="grid grid-cols-3 text-center mt-5">
+        <div>
+          <span id="total" class="block text-2xl font-bold">0</span>
+          <span>Total</span>
         </div>
 
-        <p class="text-center mt-4">Organisez votre vie en un seul endroit</p>
-
-        <div class="grid grid-cols-3 text-center mt-5">
-          <div>
-            <span id="total" class="block text-2xl font-bold">0</span>
-            <span>Total</span>
-          </div>
-
-          <div>
-            <span id="termine" class="block text-2xl font-bold">0</span>
-            <span>Terminées</span>
-          </div>
-
-          <div>
-            <span id="attente" class="block text-2xl font-bold">0</span>
-            <span>En attente</span>
-          </div>
+        <div>
+          <span id="termine" class="block text-2xl font-bold">0</span>
+          <span>Terminées</span>
         </div>
-      </header>
+
+        <div>
+          <span id="attente" class="block text-2xl font-bold">0</span>
+          <span>En attente</span>
+        </div>
+      </div>
+    </header>
 
       <form
         id="todoForm"
@@ -170,13 +168,10 @@
       <section class="flex justify-between items-center px-3 pb-3 bg-white dark:bg-gray-900 dark:text-white">
         <label for="sort" > Trier : </label>
 
-        <select
-          id="sort"
-          class="border border-gray-200 rounded-lg px-3 py-2 outline-none"
-        >
-          <option value="date-desc">Plus récentes</option>
+      <select id="sort" class="border border-gray-200 rounded-lg px-3 py-2 outline-none">
+        <option value="date-desc">Plus récentes</option>
 
-          <option value="date-asc">Plus anciennes</option>
+        <option value="date-asc">Plus anciennes</option>
 
       
         </select>
@@ -195,8 +190,9 @@
       </div>
     </main>
 
-    <script src="./assets/css/icons/all.min.js"></script>
+  <script src="./assets/css/icons/all.min.js"></script>
 
-    <script type="module" src="./assets/js/index.js"></script>
-  </body>
+  <script type="module" src="./assets/js/index.js"></script>
+</body>
+
 </html>
