@@ -24,6 +24,7 @@ export class TodoApp {
         this.submitBtn = document.querySelector("#submitBtn");
         this.dueDateInput = document.querySelector("#dueDate");
         this.searchInput = document.querySelector("#search");
+        this.editDateInput=document.querySelector("#editDateInput");
         this.taskList = document.querySelector("#taskList");
 
         this.totalCount = document.querySelector("#total");
@@ -359,6 +360,7 @@ export class TodoApp {
 
         this.editTaskInput.value = task.text;
         this.editPriorityInput.value = task.priority;
+        this.editDateInput.value = task.dueDate;
 
         this.editModal.classList.remove("hidden");
         this.editModal.classList.add("flex");
@@ -385,6 +387,7 @@ export class TodoApp {
 
         const text = this.editTaskInput.value.trim();
         const priority = this.editPriorityInput.value;
+        const dueDate=this.editDateInput.value;
 
         if (text === "") {
             this.showNotification(
@@ -408,6 +411,7 @@ export class TodoApp {
 
         task.text = text;
         task.priority = priority;
+        task.dueDate=dueDate;
 
         this.saveTasks();
 
@@ -565,6 +569,7 @@ export class TodoApp {
         tasks.forEach((task) => {
             const div =
                 document.createElement("div");
+                
 
             const content =
                 document.createElement("div");
