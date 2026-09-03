@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./assets/css/output.css" />
   </head>
   <body
-    class="min-h-screen bg-linear-300 from-[#667eea] to-[#764ba2] grid place-items-center p-4"
+    class="min-h-screen bg-linear-300 from-[#667eea] to-[#764ba2] dark:bg-linear-300 dark:from-[#2226348f] dark:to-[#1a0f0f] grid place-items-center pt-10"
   >
     <div
       id="notification"
@@ -17,7 +17,9 @@
     <main
       class="w-[90vw] md:w-[60vw] rounded-2xl border-none shadow-card overflow-hidden"
     >
-      <header class="relative bg-secondary dark:bg-primary text-white p-5 border-none">
+      <header
+        class="relative bg-secondary dark:bg-primary text-white p-5 border-none"
+      >
         <div class="flex items-center justify-between text-white">
           <h1 class="text-2xl font-bold text-white">Pola</h1>
           <div
@@ -32,30 +34,32 @@
             >
             </i>
 
-          <i class="fa-solid fa-moon moon block group-hover:rotate-90 text-xl transform transition-all duration-500">
-          </i>
-        </button>
-      </div>
-
-      <p class="text-center mt-4">Organisez votre vie en un seul endroit</p>
-
-      <div class="grid grid-cols-3 text-center mt-5">
-        <div>
-          <span id="total" class="block text-2xl font-bold">0</span>
-          <span>Total</span>
+            <i
+              class="fa-solid fa-moon moon block group-hover:rotate-90 text-xl transform transition-all duration-500"
+            >
+            </i>
+          </button>
         </div>
 
-        <div>
-          <span id="termine" class="block text-2xl font-bold">0</span>
-          <span>Terminées</span>
-        </div>
+        <p class="text-center mt-4">Organisez votre vie en un seul endroit</p>
 
-        <div>
-          <span id="attente" class="block text-2xl font-bold">0</span>
-          <span>En attente</span>
+        <div class="grid grid-cols-3 text-center mt-5">
+          <div>
+            <span id="total" class="block text-2xl font-bold">0</span>
+            <span>Total</span>
+          </div>
+
+          <div>
+            <span id="termine" class="block text-2xl font-bold">0</span>
+            <span>Terminées</span>
+          </div>
+
+          <div>
+            <span id="attente" class="block text-2xl font-bold">0</span>
+            <span>En attente</span>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
       <form
         id="todoForm"
@@ -88,18 +92,19 @@
           type="submit"
           class="bg-primary dark:bg-gray-900 justify-center self-center flex items-center text-white rounded-lg btn px-2"
         >
-          <i class="fa-solid fa-plus"></i>Ajouter
-        </button>
+          <i class="fa-solid fa-plus"></i>Ajou!task.completedter!task.completed
+        </button>!task.completed
       </form>
-      <section class="grid md:grid-cols-2 gap-2 p-3 bg-white dark:bg-gray-900 dark:text-white items-center">
+      <section
+        class="grid md:grid-cols-2 gap-2 p-3 bg-white dark:bg-gray-900 dark:text-white items-center"
+      >
         <div class="grid grid-cols-2 md:grid-cols-3 text-nowrap gap-2">
           <div id="allTasks" class="btn">Toutes</div>
           <div id="pendingTasks" class="btn">En attente</div>
           <div id="completedTasks" class="btn">Terminees</div>
         </div>
-        <div
-          class="border flex items-center justify-between flex-1 border-gray-200 rounded-2xl p-2 group focus-within:border-primary"
-        >
+        
+          <div class="border flex items-center justify-between flex-1 border-gray-200 rounded-2xl p-2 group focus-within:border-primary"> 
           <input
             id="search"
             type="text"
@@ -125,12 +130,7 @@
               class="input"
               placeholder="Modifier la tâche..."
             />
-              <input
-              id="editDateInput"
-              type="date"
-              class="input"
-             
-            />
+            <input id="editDateInput" type="date" class="input" />
             <select
               id="editPriorityInput"
               class="border-gray-200 px-2 outline-none border rounded-lg"
@@ -154,9 +154,7 @@
         class="hidden fixed inset-0 bg-black/50 items-center justify-center"
       >
         <div class="bg-white rounded-xl flex flex-col p-3 gap-3">
-          <div id="deleteMessage">
-
-          </div>
+          <div id="deleteMessage"></div>
           <div class="flex justify-end gap-2">
             <button class="btn" id="cancelDeleteBtn">Annuler</button>
             <button class="btn bg-red-500 text-white" id="deleteBtn">
@@ -165,19 +163,47 @@
           </div>
         </div>
       </section>
-      <section class="flex justify-between items-center px-3 pb-3 bg-white dark:bg-gray-900 dark:text-white">
-        <label for="sort" > Trier : </label>
-
-      <select id="sort" class="border border-gray-200 rounded-lg px-3 py-2 outline-none">
+      <section
+        class="flex justify-between items-center px-3 pb-3 bg-white dark:bg-gray-900 dark:text-white"
+      >
+        <label for="sort"> Trier par: </label>
+        <!-- <select id="sort" class="border border-gray-200 rounded-lg px-3 py-2 outline-none">
         <option value="date-desc">Plus récentes</option>
 
         <option value="date-asc">Plus anciennes</option>
 
       
-        </select>
+        </select> -->
+
+        <label for="">
+          Date
+          <select
+            id="sort"
+            class="border border-gray-200 rounded-lg px-3 py-2 outline-none"
+          >
+            <option value="date-desc">Plus récentes</option>
+            <option value="date-asc">Plus anciennes</option>
+          </select>
+        </label>
+        <label for="">
+          Priorite
+          <select
+            id="priorite"
+            class="border border-gray-200 rounded-lg px-3 py-2 outline-none"
+          >
+            <option value="facile">Facile</option>
+            <option value="moyenne">Moyenne</option>
+            <option value="difficile">Difficile</option>
+          </select>
+        </label>
       </section>
-      <section id="taskList" class="bg-white dark:bg-gray-900 dark:text-white h-40 scrolling"></section>
-      <div class="flex justify-center items-center gap-4 p-4 bg-white dark:bg-gray-900 dark:text-white">
+      <section
+        id="taskList"
+        class="bg-white dark:bg-gray-900 dark:text-white h-40 scrolling"
+      ></section>
+      <div id="pagination"
+        class="hidden justify-center items-center gap-4 p-4 bg-white dark:bg-gray-900 dark:text-white"
+      >
         <button id="prevBtn" class="btn">
           <i class="fa-solid fa-chevron-left"></i>
           Précédent
@@ -190,9 +216,8 @@
       </div>
     </main>
 
-  <script src="./assets/css/icons/all.min.js"></script>
+    <script src="./assets/css/icons/all.min.js"></script>
 
-  <script type="module" src="./assets/js/index.js"></script>
-</body>
-
+    <script type="module" src="./assets/js/index.js"></script>
+  </body>
 </html>
