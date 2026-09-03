@@ -8,10 +8,9 @@ export class TodoApp {
         this.currentPage = 1;
         this.tasksPerPage = 5;
         this.nextId = 1;
-
         this.editingTaskId = null;
         this.deleteTaskId = null;
-
+        this.priorityFilter = "";
         this.darkMode = "light";
         this.currentSort = "date-desc";
     }
@@ -24,9 +23,11 @@ export class TodoApp {
         this.submitBtn = document.querySelector("#submitBtn");
         this.dueDateInput = document.querySelector("#dueDate");
         this.searchInput = document.querySelector("#search");
-        this.editDateInput=document.querySelector("#editDateInput");
+        this.pagination=document.querySelector("#pagination")
+        
+        this.editDateInput = document.querySelector("#editDateInput");
         this.taskList = document.querySelector("#taskList");
-
+        this.priorite = document.querySelector('#priorite');
         this.totalCount = document.querySelector("#total");
         this.completedCount = document.querySelector("#termine");
         this.pendingCount = document.querySelector("#attente");
@@ -41,7 +42,7 @@ export class TodoApp {
 
         this.sortInput = document.querySelector("#sort");
 
-       
+
         this.editModal = document.querySelector("#editModal");
         this.editTaskInput = document.querySelector("#editTaskInput");
         this.editPriorityInput =
@@ -67,14 +68,16 @@ export class TodoApp {
     }
 
     setupEventListeners() {
-       
+
         this.todoForm.addEventListener("submit", (e) => {
             e.preventDefault();
             this.addTask();
         });
 
-    
+
         this.searchInput.addEventListener("input", () => {
+            console.log("hello");
+            
             this.searchQuery = this.searchInput.value;
             this.currentPage = 1;
             this.renderTasks();
@@ -84,12 +87,17 @@ export class TodoApp {
             this.toggleDarkMode();
         });
 
-     
+
         this.sortInput.addEventListener("change", () => {
             this.currentSort = this.sortInput.value;
             this.currentPage = 1;
             this.renderTasks();
         });
+        this.priorite.addEventListener('change', () => {
+            this.priorityFilter = this.priorite.value;
+            this.currentPage = 1;
+            this.renderTasks();
+        })
 
         this.allTasksBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -141,7 +149,7 @@ export class TodoApp {
             this.renderTasks();
         });
 
-        
+
         this.completedTasksBtn.addEventListener("click", (e) => {
             e.preventDefault();
 
@@ -166,7 +174,7 @@ export class TodoApp {
 
             this.renderTasks();
         });
-
+        priorite
 
         this.prevBtn.addEventListener("click", () => {
             if (this.currentPage > 1) {
@@ -175,7 +183,7 @@ export class TodoApp {
             }
         });
 
-    
+
         this.nextBtn.addEventListener("click", () => {
             const totalPages = this.getTotalPages();
 
@@ -185,17 +193,17 @@ export class TodoApp {
             }
         });
 
-   
+
         this.cancelEditBtn.addEventListener("click", () => {
             this.closeEditModal();
         });
 
-    
+
         this.cancelDeleteBtn.addEventListener("click", () => {
             this.closeDeleteModal();
         });
 
-      
+
         this.deleteBtn.addEventListener("click", () => {
             if (this.deleteTaskId === null) {
                 return;
@@ -205,13 +213,13 @@ export class TodoApp {
             this.closeDeleteModal();
         });
 
-      
+
         this.saveEditBtn.addEventListener("click", () => {
             this.saveTaskEdit();
         });
     }
 
-  
+
 
     addTask() {
         const text = this.taskInput.value.trim();
@@ -289,7 +297,6 @@ export class TodoApp {
     }
 
 
-
     openDeleteModal(id) {
         const task = this.tasks.find(
             (task) => task.id === id
@@ -316,11 +323,11 @@ export class TodoApp {
         this.deleteModal.classList.add("hidden");
         this.deleteModal.classList.remove("flex");
 
-     
+
         this.deleteTaskId = null;
     }
 
- 
+
 
     toggleComplete(id) {
         const task = this.tasks.find(
@@ -387,7 +394,7 @@ export class TodoApp {
 
         const text = this.editTaskInput.value.trim();
         const priority = this.editPriorityInput.value;
-        const dueDate=this.editDateInput.value;
+        const dueDate = this.editDateInput.value;
 
         if (text === "") {
             this.showNotification(
@@ -411,7 +418,7 @@ export class TodoApp {
 
         task.text = text;
         task.priority = priority;
-        task.dueDate=dueDate;
+        task.dueDate = dueDate;
 
         this.saveTasks();
 
@@ -427,9 +434,30 @@ export class TodoApp {
     getFilteredTasks() {
         let filteredTasks = [...this.tasks];
 
+
         if (this.currentFilter === "attente") {
             filteredTasks = filteredTasks.filter(
                 (task) => !task.completed
+            );
+        }
+        if (this.currentFilter === "toutes") {
+            filteredTasks = filteredTasks.map(
+                (task) => task
+            );
+        }
+        if (this.priorityFilter === "facile") {
+            filteredTasks = filteredTasks.filter(
+                (task) => task.priority === "facile"
+            );
+        }
+        if (this.priorityFilter === "moyenne") {
+            filteredTasks = filteredTasks.filter(
+                (task) => task.priority === "moyenne"
+            );
+        }
+        if (this.priorityFilter === "difficile") {
+            filteredTasks = filteredTasks.filter(
+                (task) => task.priority === "difficile"
             );
         }
 
@@ -472,31 +500,8 @@ export class TodoApp {
             );
         }
 
-        if (this.currentSort === "priority") {
-            const priorityOrder = {
-                facile: 1,
-                moyenne: 2,
-                difficile: 3
-            };
 
-            return tasks.sort(
-                (a, b) =>
-                    priorityOrder[b.priority] -
-                    priorityOrder[a.priority]
-            );
-        }
 
-        if (this.currentSort === "due-date") {
-            return tasks.sort((a, b) => {
-                if (!a.dueDate) return 1;
-                if (!b.dueDate) return -1;
-
-                return (
-                    new Date(a.dueDate) -
-                    new Date(b.dueDate)
-                );
-            });
-        }
 
         return tasks;
     }
@@ -526,7 +531,7 @@ export class TodoApp {
         );
     }
 
- 
+
 
     renderTasks() {
         const tasks =
@@ -565,11 +570,18 @@ export class TodoApp {
 
             return;
         }
-
+        if(this.tasks.length > 5){
+            this.pagination.classList.add('flex')
+            this.pagination.classList.remove('hidden')
+        }
+        else if(this.tasks.length <= 5){
+ this.pagination.classList.add('hidden')
+            this.pagination.classList.remove('flex')
+        }
         tasks.forEach((task) => {
             const div =
                 document.createElement("div");
-                
+
 
             const content =
                 document.createElement("div");
@@ -585,7 +597,8 @@ export class TodoApp {
 
             const date =
                 document.createElement("small");
-
+            const dateCreated =
+                document.createElement("small");
             const actions =
                 document.createElement("div");
 
@@ -601,22 +614,25 @@ export class TodoApp {
             const deleteIcon =
                 document.createElement("i");
 
-          
+
+
+
             div.className =
                 "flex items-center justify-between p-4 border-b border-gray-500 even:bg-amber-500/20";
 
             content.className =
                 "flex items-center gap-3";
 
-        
+
             actions.className =
                 "flex gap-3";
 
             checkbox.type = "checkbox";
             checkbox.checked = task.completed;
-            checkbox.className="accent-success"
+            checkbox.className = "accent-success";
+            dateCreated.textContent = task.createdAt;
 
-    
+
             text.textContent = task.text;
 
             priority.textContent =
@@ -635,7 +651,7 @@ export class TodoApp {
                     "text-xs text-gray-500";
             }
 
-          
+
             editIcon.className =
                 "fa-solid fa-pen text-green-500";
 
@@ -648,7 +664,7 @@ export class TodoApp {
             editBtn.appendChild(editIcon);
             deleteBtn.appendChild(deleteIcon);
 
-        
+
             checkbox.addEventListener(
                 "change",
                 () => {
@@ -664,7 +680,7 @@ export class TodoApp {
                 }
             );
 
-      
+
             deleteBtn.addEventListener(
                 "click",
                 () => {
@@ -679,10 +695,11 @@ export class TodoApp {
                 );
             }
 
-  
+
             content.appendChild(checkbox);
             content.appendChild(text);
             content.appendChild(priority);
+
 
             if (task.dueDate) {
                 content.appendChild(date);
@@ -733,7 +750,7 @@ export class TodoApp {
             `Page ${this.currentPage} / ${totalPages}`;
     }
 
-  
+
 
     updateStats() {
         const totalTasks =
@@ -776,7 +793,7 @@ export class TodoApp {
         }, 3000);
     }
 
- 
+
 
     toggleDarkMode() {
         this.darkMode =
@@ -792,7 +809,7 @@ export class TodoApp {
         this.saveDarkModePreference();
     }
 
- 
+
 
     saveTasks() {
         localStorage.setItem(
@@ -882,7 +899,7 @@ export class TodoApp {
         );
     }
 
-   
+
     checkDueDates() {
         const now = new Date();
 
@@ -904,15 +921,11 @@ export class TodoApp {
                 difference > 0 &&
                 difference <= oneDay
             ) {
-                console.log(
-                    `Rappel : "${task.text}" arrive bientôt à échéance.`
-                );
+                this.showNotification(`Rappel : "${task.text}" arrive bientôt à échéance.`)
             }
 
             if (difference < 0) {
-                console.log(
-                    `La tâche "${task.text}" est en retard.`
-                );
+                this.showNotification(`La tâche "${task.text}" est en retard.`)
             }
         });
     }
