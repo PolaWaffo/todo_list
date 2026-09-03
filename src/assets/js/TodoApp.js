@@ -240,6 +240,10 @@ export class TodoApp {
             this.showNotification("La tâche existe déjà");
             return;
         }
+        if(new Date(dueDate) < new Date()){
+            this.showNotification("L'echeance ne pas etre une date inferieur a aujourdhui");
+            return
+        }
 
         const task = new Task(
             this.nextId,
@@ -630,7 +634,7 @@ export class TodoApp {
             checkbox.type = "checkbox";
             checkbox.checked = task.completed;
             checkbox.className = "accent-success";
-            dateCreated.textContent = task.createdAt;
+            dateCreated.textContent = ` Cree le: ${this.formatDate(task.createdAt)}`;
 
 
             text.textContent = task.text;
@@ -699,11 +703,14 @@ export class TodoApp {
             content.appendChild(checkbox);
             content.appendChild(text);
             content.appendChild(priority);
-
+    if (task.createdAt) {
+                content.appendChild(dateCreated);
+            }
 
             if (task.dueDate) {
                 content.appendChild(date);
             }
+         
 
             actions.appendChild(editBtn);
             actions.appendChild(deleteBtn);
