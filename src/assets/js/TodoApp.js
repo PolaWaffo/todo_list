@@ -419,10 +419,15 @@ export class TodoApp {
             );
             return;
         }
+        if(new Date(task.dueDate) < task.createdAt){
+            this.showNotification("La date d'echeance ne peut etre inferieur a la date de creation");
+            return
+        }
 
         task.text = text;
         task.priority = priority;
         task.dueDate = dueDate;
+
 
         this.saveTasks();
 
